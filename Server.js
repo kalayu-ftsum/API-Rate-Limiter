@@ -1,4 +1,5 @@
 const express = require('express');
+const Buckets=require('./utils/buckets')
 
 const app = express();
 
@@ -7,35 +8,24 @@ app.get('/unlimited', (req, res) => {
     res.send('Unlimited! Let\'s Go!')
 })
 
-let buckets = {}
+
+// Creates token buckets object
 const LIMIT=2;
-const updateTime=0.01 // in seconds
+const updateTime=1 // in seconds
+let buckets = new Buckets(LIMIT,updateTime)
 
 app.get('/limited', (req, res) => {
     const ipAddress = req.header('x-forwarded-for') || req.socket.remoteAddress;
-    
-    if (buckets[ipAddress] !== undefined) {
-        
-        
-        console.log('buckets',buckets)
-
-        const token=buckets[ipAddress].token
-        const currentTime=new Date()
-        const timeDiff=Math.floor((currentTime - buckets[ipAddress].ts)/1000)
-        console.log({timeDiff})
-        console.log({now:new Date()})
-        buckets[ipAddress].token=Math.min((token + timeDiff*updateTime),LIMIT)
-
-        if(buckets[ipAddress].token <= 1 ){
+    const bucket=buckets.getBucket(ipAddress)
+    if (bucket !== undefined) {
+        console.log('exist')
+        buckets.refill(ipAddress);
+        if(bucket.token <= 1 ){
             return  res.status(429).send('Too Many Requests.')
         }
-        buckets[ipAddress].token -= 1
-        
+        buckets.removeToken(ipAddress)
     } else {
-        buckets[ipAddress] ={
-            token:LIMIT,
-            ts:new Date()
-        }
+       buckets.addBucket(ipAddress)
     }
 
 
