@@ -15,7 +15,7 @@ class WindowCounter {
     }
     getCurrentWindow() {
         let currentTime = new Date().getTime()
-
+        
         return Math.floor((currentTime - this.windowTime) / (this.windowSize * 1000))
     }
     isThresholdReached() {

@@ -1,6 +1,7 @@
 const express = require('express');
 const TokenBucketsRoute=require('./routes/tokenBuckets')
 const WindowCounter=require('./routes/windowCounter')
+const SlidingWindowLog=require('./routes/slidingWindowLog')
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.get('/unlimited', (req, res) => {
 
 app.use('/tokenbuckets',TokenBucketsRoute )
 app.use('/windowCounter',WindowCounter)
+app.use('/slidingwindowlog',SlidingWindowLog)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
