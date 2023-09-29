@@ -3,6 +3,8 @@ const TokenBucketsRoute=require('./routes/tokenBuckets')
 const WindowCounter=require('./routes/windowCounter')
 const SlidingWindowLog=require('./routes/slidingWindowLog');
 const slidingWindowCounter = require('./routes/slidingWindowCounter');
+const slidingWinCounterRedis=require('./routes/slidingWinCounterRedis');
+
 
 const app = express();
 
@@ -15,6 +17,7 @@ app.use('/tokenbuckets',TokenBucketsRoute )
 app.use('/windowCounter',WindowCounter)
 app.use('/slidingwindowlog',SlidingWindowLog)
 app.use('/slidingwindowcounter',slidingWindowCounter)
+app.use('/slidingWinCounterRedis',slidingWinCounterRedis)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
