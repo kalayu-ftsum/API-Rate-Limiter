@@ -4,7 +4,7 @@ const WindowCounter=require('./routes/windowCounter')
 const SlidingWindowLog=require('./routes/slidingWindowLog');
 const slidingWindowCounter = require('./routes/slidingWindowCounter');
 const slidingWinCounterRedis=require('./routes/slidingWinCounterRedis');
-
+const RateLimiterPackage=require('./routes/rateLimiterPackage');
 
 const app = express();
 
@@ -18,6 +18,7 @@ app.use('/windowCounter',WindowCounter)
 app.use('/slidingwindowlog',SlidingWindowLog)
 app.use('/slidingwindowcounter',slidingWindowCounter)
 app.use('/slidingWinCounterRedis',slidingWinCounterRedis)
+app.use('/rateLimiterPackage',RateLimiterPackage)
 
 
 // Add this at the end to catch unhandled promises
