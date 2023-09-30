@@ -19,6 +19,14 @@ app.use('/slidingwindowlog',SlidingWindowLog)
 app.use('/slidingwindowcounter',slidingWindowCounter)
 app.use('/slidingWinCounterRedis',slidingWinCounterRedis)
 
+
+// Add this at the end to catch unhandled promises
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    // You can add custom handling/logging here
+    // For example, you might want to log the error, send an alert, or gracefully shut down the application
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 });
