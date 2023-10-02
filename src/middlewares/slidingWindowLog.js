@@ -1,8 +1,8 @@
 
 
 const slidingWindow = {
-    windowSize: 60 , // 1 minute window
-    maxRequests: 10,       // Maximum requests allowed in the window
+    windowSize: 60 ,        // 1-minute window
+    maxRequests: 5,       // Maximum requests allowed in the window
     requests: [],
 };
 

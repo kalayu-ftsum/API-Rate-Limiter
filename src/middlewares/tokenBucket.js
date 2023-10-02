@@ -1,8 +1,8 @@
 const Buckets=require('../utils/buckets')
 
 // Creates token buckets object
-const LIMIT=2;
-const updateTime=1 // in seconds
+const LIMIT=5;
+const updateTime=60 // in seconds
 let buckets = new Buckets(LIMIT,updateTime)
 
 module.exports=(req,res,next)=>{

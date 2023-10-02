@@ -1,7 +1,7 @@
 const redisClient = require('../utils/redisConnection')
 
-const windowSize = 60;       //time window in seconds
-const maxRequests = 60;     // Maximum requests allowed in the window
+const windowSize = 60;      // 1-minute window
+const maxRequests = 5;     // Maximum requests allowed in the window
 
 module.exports = async (req, res, next) => {
     const currentTime = new Date().getTime(); 

@@ -2,8 +2,8 @@
 
 // Define a sliding window counter object
 const slidingWindowCounter = {
-    windowSize: 60, // 1-minute window
-    maxRequests: 10,       // Maximum requests allowed in the window
+    windowSize: 60,       // 1-minute window
+    maxRequests: 5,       // Maximum requests allowed in the window
     windowStart: new Date().getTime(),
     requestQueue: [],
   };
