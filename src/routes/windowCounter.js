@@ -1,8 +1,8 @@
 const router=require('express').Router()
 
-const slidingWindowLogMiddleware = require('../middlewares/slidingWindowLog')
+const windowCounterMiddleware = require('../middlewares/windowCounter')
 
-router.use(slidingWindowLogMiddleware)
+router.use(windowCounterMiddleware)
 
 
 router.get('/limited',(req,res)=>{
