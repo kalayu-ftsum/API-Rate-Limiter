@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
     const requestQueue = await redisClient.lRange('requestTimestamps', 0, -1)
     // let requestQueue=[]
     while (requestQueue.length > 0 &&
-        requestQueue[0] <= currentTime - windowSize * 1000) {
+        (parseInt(requestQueue[0]) < currentTime - windowSize * 1000)) {
         requestQueue.shift();
     }
 
