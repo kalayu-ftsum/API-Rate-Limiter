@@ -1,10 +1,11 @@
 const express = require('express');
-const TokenBucketsRoute=require('./routes/tokenBuckets')
-const WindowCounter=require('./routes/windowCounter')
-const SlidingWindowLog=require('./routes/slidingWindowLog');
+
+const tokenBucketsRoute=require('./routes/tokenBuckets')
+const windowCounter=require('./routes/windowCounter')
+const slidingWindowLog=require('./routes/slidingWindowLog');
 const slidingWindowCounter = require('./routes/slidingWindowCounter');
 const slidingWinCounterRedis=require('./routes/slidingWinCounterRedis');
-const RateLimiterPackage=require('./routes/rateLimiterPackage');
+const rateLimiterPackage=require('./routes/rateLimiterPackage');
 
 const app = express();
 
@@ -13,12 +14,12 @@ app.get('/unlimited', (req, res) => {
     res.send('Unlimited! Let\'s Go!')
 })
 
-app.use('/tokenbuckets',TokenBucketsRoute )
-app.use('/windowCounter',WindowCounter)
-app.use('/slidingwindowlog',SlidingWindowLog)
+app.use('/tokenbuckets',tokenBucketsRoute )
+app.use('/windowCounter',windowCounter)
+app.use('/slidingwindowlog',slidingWindowLog)
 app.use('/slidingwindowcounter',slidingWindowCounter)
 app.use('/slidingWinCounterRedis',slidingWinCounterRedis)
-app.use('/rateLimiterPackage',RateLimiterPackage)
+app.use('/rateLimiterPackage',rateLimiterPackage)
 
 
 // Add this at the end to catch unhandled promises
