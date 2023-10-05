@@ -1,21 +1,18 @@
 
+const SlidingWindowLog=require('../utils/slidingWindowLog');
 
-const slidingWindow = {
-    windowSize: 60,        // 1-minute window
-    maxRequests: 5,       // Maximum requests allowed in the window
-    requests: [],
-};
+
+
+const windowSize= 60;  // 1-minute window
+const maxRequests= 5; // Maximum requests allowed in the window
+const slidingWindow = new SlidingWindowLog(windowSize,maxRequests)
 
 
 module.exports = (req, res, next) => {
     try {
-        const currentTime = new Date().getTime();
-
-        slidingWindow.requests = slidingWindow.requests.filter((timestamp) => {
-            return timestamp + slidingWindow.windowSize * 1000 > currentTime;
-        });
-        if (slidingWindow.requests.length < slidingWindow.maxRequests) {
-            slidingWindow.requests.push(currentTime);
+      
+        let isThresholdReached=slidingWindow.isThresholdReached()
+        if (isThresholdReached) {
             next();
         } else {
             res.status(429).send('Rate limit exceeded');
