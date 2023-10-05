@@ -14,9 +14,9 @@ class SlidingWindowLog {
         });
         if (this.requests.length < this.maxRequests) {
             this.addRequest(currentTime);
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 }
