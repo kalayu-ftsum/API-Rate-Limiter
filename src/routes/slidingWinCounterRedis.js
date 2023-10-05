@@ -1,11 +1,16 @@
-const router=require('express').Router()
+const router = require('express').Router()
 
-const slidingWinCounterRedisMiddleware=require('../middlewares/slidingWinCounterRedis')
+const slidingWinCounterRedisMiddleware = require('../middlewares/slidingWinCounterRedis')
 
 router.use(slidingWinCounterRedisMiddleware)
 
-router.get('/',(req,res,next)=>{
-    res.send('Sliding Window Counter using Redis.')
+router.get('/', (req, res) => {
+    try {
+        res.send('Sliding Window Counter using Redis.')
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Internal server error.')
+    }
 })
 
-module.exports=router
+module.exports = router
